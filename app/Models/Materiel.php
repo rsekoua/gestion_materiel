@@ -49,4 +49,14 @@ class Materiel extends Model
 
         return false;
     }
+
+    public function getLastRestitutionDate()
+    {
+        return $this->attributions()
+            ->whereNotNull('date_restitution') // Filtre les attributions qui ont une date de restitution
+            ->orderBy('date_restitution', 'desc') // Trie par la date de restitution la plus récente
+            ->first()
+            ?->date_restitution; // Récupère la première attribution avec la date la plus récente
+
+    }
 }

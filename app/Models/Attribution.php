@@ -11,9 +11,6 @@ class Attribution extends Model
 {
     use HasFactory;
 
-    /**
-     * @var \Illuminate\Support\Carbon|mixed
-     */
    // public mixed $date_restitution;
     protected $fillable = ['materiel_id', 'employe_id', 'service', 'date_attribution', 'date_restitution'];
 

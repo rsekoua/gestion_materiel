@@ -12,6 +12,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -56,6 +57,7 @@ class MaterielResource extends Resource
                 DatePicker::make('date_fabrication')
                     ->label('Date de Fabrication')
                     ->required()
+                    ->native(false)
                     ->reactive() // Pour mettre à jour automatiquement la date d'amortissement
                     ->afterStateUpdated(function (callable $set, $state) {
                         // Calculer automatiquement la date d'amortissement lorsque la date de fabrication est définie
@@ -82,22 +84,24 @@ class MaterielResource extends Resource
                     ->label('Type de matériel')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('marque')
+                    ->sortable()
                     ->label('Marque'),
                 Tables\Columns\TextColumn::make('modele')
                     ->label('Modèle'),
                 Tables\Columns\TextColumn::make('numero_serie')
-                    ->label('Numéro de série')
-                    ->sortable(),
+                    ->label('Numéro de série'),
                 Tables\Columns\BooleanColumn::make('est_disponible')
-                    ->label('Disponible'),
+                    ->label('Disponible')
+                    ->sortable(),
                 Tables\Columns\BooleanColumn::make('est_fonctionnel')
-                    ->label('fonctionnel'),
-                Tables\Columns\TextColumn::make('date_fabrication')
-                    ->label('Date de fabrication')
+                    ->label('Fonctionnel')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('date_amortissement')
-                    ->label('Date d\'Amortissement')
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('date_fabrication')
+//                    ->label('Date de fabrication')
+//                    ->sortable(),
+//                Tables\Columns\TextColumn::make('date_amortissement')
+//                    ->label('Date d\'Amortissement')
+//                    ->sortable(),
                 Tables\Columns\BooleanColumn::make('est_amorti')
                     ->label('Amorti'),
 
@@ -121,7 +125,7 @@ class MaterielResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\AttributionsRelationManager::class
         ];
     }
 

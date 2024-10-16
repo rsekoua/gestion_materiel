@@ -7,6 +7,7 @@ use App\Filament\Resources\AttributionResource\RelationManagers;
 use App\Models\Attribution;
 use App\Models\Employe;
 use App\Models\Materiel;
+use App\Rules\DatePostRestitution;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -100,6 +101,7 @@ class AttributionResource extends Resource
                     ->label('Employé'),
                 Tables\Columns\TextColumn::make('service')
                     ->label('Service'),
+                   // ->visible(fonction (Attribution $record) { }), // Vérification si 'materiel' n'est pas null,
                 Tables\Columns\TextColumn::make('date_attribution')
                     ->label('Date d\'attribution')
                     ->sortable(),
